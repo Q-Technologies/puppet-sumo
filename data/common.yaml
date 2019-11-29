@@ -31,9 +31,10 @@ sumo::token                  : null
 sumo::win_run_as_password    : null
 sumo::install_properties_path: null
 sumo::user_properties_path   : /opt/SumoCollector/config/user.properties
-sumo::package_name           : SumoCollector
-sumo::package_ver            : latest
-sumo::service_name           : collector
-sumo::service_state: 
+sumo::package:
+  name   : SumoCollector
+  version: latest
+sumo::service:
+  name   : collector
   running: true
   enable : true

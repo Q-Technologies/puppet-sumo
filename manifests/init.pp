@@ -33,10 +33,8 @@ class sumo (
   Optional[String] $win_run_as_password,
   String $user_properties_path,
   Optional[String] $install_properties_path,
-  String $package_name,
-  String $package_ver,
-  String $service_name,
-  Struct[{running => Boolean, enable => Boolean}] $service_state,
+  Struct[{name => String, version => String}] $package,
+  Struct[{name => String, running => Boolean, enable => Boolean}] $service,
 ){
   $template_data = {
     'accessid'                => $accessid,
@@ -83,8 +81,8 @@ class sumo (
       provider => 'chocolatey'
     }
     file { $install_properties_path:
-      content => epp('sumoVarFileWin.txt.epp', $template_data),
-      before  => Package[$package_name],
+      content => epp('sumo/sumoVarFileWin.txt.epp', $template_data),
+      before  => Package[$package['name']],
     }
   } else {
     File {
@@ -95,20 +93,20 @@ class sumo (
   file { $user_properties_path:
     ensure  => 'file',
     mode    => '0644',
-    content => epp('user.properties.epp', $template_data),
-    require => Package[$package_name],
-    notify  => Service[$service_name];
+    content => epp('sumo/user.properties.epp', $template_data),
+    require => Package[$package['name']],
+    notify  => Service[$service['name']];
   }
 
   ########## Install Package ############
-  package { $package_name:
-    ensure => $package_ver,
+  package { $package['name']:
+    ensure => $package['version'],
   }
 
   ########## start the service ############
-  service { $service_name:
-    ensure => $service_state['running'],
-    enable => $service_state['enable'],
+  service { $service['name']:
+    ensure => $service['running'],
+    enable => $service['enable'],
   }
 
 }
