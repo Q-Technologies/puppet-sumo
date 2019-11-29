@@ -1,38 +1,39 @@
 ---
-accessid                 : null
-accesskey                : null
-category                 : null
-clobber                  : 'true'
-collector_name           : "%{::hostname}"
-collector_secure_files   : null
-collector_url            : https://collectors.sumologic.com
-description              : "%{::hostname}"
-disable_action_source    : 'false'
-disable_script_source    : 'false'
-disable_upgrade          : 'true'
-ephemeral                : 'false'
-hostname                 : "%{::hostname}"
-local_config_mgmt        : null
-proxy_host               : null
-proxy_ntlmdomain         : null
-proxy_password           : null
-proxy_port               : null
-proxy_user               : null
-runas_username           : null
-skip_access_key_removal  : null
-skip_registration        : null
-sources_file_override    : null
-sync_sources_override    : null
-sources_path             : null
-sync_sources_path        : null
-target_cpu               : null
-time_zone                : null
-token                    : null
-win_run_as_password      : null
-sumo_user_properties_path: /opt/SumoCollector/config/user.properties
-sumo_package_name        : SumoCollector
-sumo_package_ver         : latest
-sumo_service_name        : collector
-sumo_service_state: 
+sumo::accessid               : null
+sumo::accesskey              : null
+sumo::category               : null
+sumo::clobber                : 'true'
+sumo::collector_name         : "%{::hostname}"
+sumo::collector_secure_files : null
+sumo::collector_url          : https: //collectors.sumologic.com
+sumo::description            : "%{::hostname}"
+sumo::disable_action_source  : 'false'
+sumo::disable_script_source  : 'false'
+sumo::disable_upgrade        : 'true'
+sumo::ephemeral              : 'false'
+sumo::hostname               : "%{::hostname}"
+sumo::local_config_mgmt      : null
+sumo::proxy_host             : null
+sumo::proxy_ntlmdomain       : null
+sumo::proxy_password         : null
+sumo::proxy_port             : null
+sumo::proxy_user             : null
+sumo::runas_username         : null
+sumo::skip_access_key_removal: null
+sumo::skip_registration      : null
+sumo::sources_file_override  : null
+sumo::sync_sources_override  : null
+sumo::sources_path           : null
+sumo::sync_sources_path      : null
+sumo::target_cpu             : null
+sumo::time_zone              : null
+sumo::token                  : null
+sumo::win_run_as_password    : null
+sumo::user_properties_path   : /opt/SumoCollector/config/user.properties
+sumo::user_properties_path   : null
+sumo::package_name           : SumoCollector
+sumo::package_ver            : latest
+sumo::service_name           : collector
+sumo::service_state: 
   running: true
   enable : true

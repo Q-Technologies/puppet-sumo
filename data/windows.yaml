@@ -1,2 +1,4 @@
 ---
-sumo_service_name : sumo-collector
+sumo::service_name           : sumo-collector
+sumo::install_properties_path: 'C:\windows\temp\sumoVarFile.txt'
+sumo::user_properties_path   : 'C:\Program Files\Sumo Logic Collector\config\user.properties'

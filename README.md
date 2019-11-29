@@ -54,6 +54,7 @@ Put the relevant configuration information into Hiera:
 ```
 sumo::accessid: lkskj98983hjhj
 sumo::accesskey: jlkdlkaldkalkda984nb197jdnkjsomjsdkjiocjJAOSALDJWBDahsikldjkja78
+sumo::sumo_package_ver: 19.253-26
 ```
 
 Call in the `sumo` class in your required scope:
