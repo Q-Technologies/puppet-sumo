@@ -1,5 +1,7 @@
 ---
 sumo::service:
   name: sumo-collector
+  running: true
+  enable : true
 sumo::install_properties_path: 'C:\windows\temp\sumoVarFile.txt'
 sumo::user_properties_path   : 'C:\Program Files\Sumo Logic Collector\config\user.properties'
