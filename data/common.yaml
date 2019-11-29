@@ -29,8 +29,8 @@ sumo::target_cpu             : null
 sumo::time_zone              : null
 sumo::token                  : null
 sumo::win_run_as_password    : null
+sumo::install_properties_path: null
 sumo::user_properties_path   : /opt/SumoCollector/config/user.properties
-sumo::user_properties_path   : null
 sumo::package_name           : SumoCollector
 sumo::package_ver            : latest
 sumo::service_name           : collector
