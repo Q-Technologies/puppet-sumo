@@ -5,7 +5,7 @@ sumo::category               : null
 sumo::clobber                : 'true'
 sumo::collector_name         : "%{::hostname}"
 sumo::collector_secure_files : null
-sumo::collector_url          : https: //collectors.sumologic.com
+sumo::collector_url          : https://collectors.sumologic.com
 sumo::description            : "%{::hostname}"
 sumo::disable_action_source  : 'false'
 sumo::disable_script_source  : 'false'
