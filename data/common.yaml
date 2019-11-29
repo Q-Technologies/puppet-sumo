@@ -1,1 +1,38 @@
 ---
+accessid                 : null
+accesskey                : null
+category                 : null
+clobber                  : 'true'
+collector_name           : "%{::hostname}"
+collector_secure_files   : null
+collector_url            : https://collectors.sumologic.com
+description              : "%{::hostname}"
+disable_action_source    : 'false'
+disable_script_source    : 'false'
+disable_upgrade          : 'true'
+ephemeral                : 'false'
+hostname                 : "%{::hostname}"
+local_config_mgmt        : null
+proxy_host               : null
+proxy_ntlmdomain         : null
+proxy_password           : null
+proxy_port               : null
+proxy_user               : null
+runas_username           : null
+skip_access_key_removal  : null
+skip_registration        : null
+sources_file_override    : null
+sync_sources_override    : null
+sources_path             : null
+sync_sources_path        : null
+target_cpu               : null
+time_zone                : null
+token                    : null
+win_run_as_password      : null
+sumo_user_properties_path: /opt/SumoCollector/config/user.properties
+sumo_package_name        : SumoCollector
+sumo_package_ver         : latest
+sumo_service_name        : collector
+sumo_service_state: 
+  running: true
+  enable : true

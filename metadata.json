@@ -1,12 +1,15 @@
 {
   "name": "qtechnologies-sumo",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "author": "qtechnologies",
-  "summary": "",
+  "summary": "Install and configure the Sumo Logic collector install using local software distribution. Providing more control over lifecycle.",
   "license": "Apache-2.0",
-  "source": "",
+  "source": "https://github.com/Q-Technologies/puppet-sumo",
   "dependencies": [
-
+    {
+      "name": "puppetlabs/chocolatey",
+      "version_requirement": ">= 2.0.0 < 10.0.0"
+    }
   ],
   "operatingsystem_support": [
     {

@@ -1,87 +1,130 @@
 # sumo
 
-Welcome to your new module. A short overview of the generated parts can be found in the PDK documentation at https://puppet.com/pdk/latest/pdk_generating_modules.html .
-
-The README template below provides a starting point with details about what information to include in your README.
+Install and configure the Sumo Logic collector install using local software distribution. Providing more control over lifecycle.
 
 #### Table of Contents
 
-1. [Description](#description)
-2. [Setup - The basics of getting started with sumo](#setup)
-    * [What sumo affects](#what-sumo-affects)
-    * [Setup requirements](#setup-requirements)
-    * [Beginning with sumo](#beginning-with-sumo)
-3. [Usage - Configuration options and additional functionality](#usage)
-4. [Limitations - OS compatibility, etc.](#limitations)
-5. [Development - Guide for contributing to the module](#development)
+<!-- vim-markdown-toc GFM -->
+
+* [Description](#description)
+* [Setup](#setup)
+  * [Setup Requirements](#setup-requirements)
+    * [Windows](#windows)
+    * [Linux](#linux)
+  * [Beginning with sumo](#beginning-with-sumo)
+* [Usage](#usage)
+* [Limitations](#limitations)
+* [Development](#development)
+
+<!-- vim-markdown-toc -->
+
 
 ## Description
 
-Briefly tell users why they might want to use your module. Explain what your module does and what kind of problems users can solve with it.
+There are currently a few SumoLogic modules already.  Most notably https://forge.puppet.com/pjorg/sumo and 
+https://github.com/SumoLogic/sumologic-collector-puppet-module.  The problem with the former is that it does not
+support Windows or many of the options for the `user.properties` file.  The problem with the latter is that it assumes every
+node can directly connect to the internet for curl (some firewalls only allow Sumo profile traffic) and it doesn't allow you to
+upgrade or control the package versions.  So this module takes the approach of the former, but the detail from the second.
 
-This should be a fairly short description helps the user decide if your module is what they want.
+This module assumes an existing package management solution is in place (YUM for RHEL/SLES and Chocolatey for Windows). 
+It takes the following platform approach:
+
+* Windows - install pkg via chocolatey with the site customisation being driven during pkg install. Upgradeable via Chocolatey.
+* Linux - install RPM, configure, then start sumo.  Upgradeable via RPM.
+<!--* UNIX (TODO) - install from tar, configure, then start sumo.  Not readily upgradeable.-->
+
 
 ## Setup
 
-### What sumo affects **OPTIONAL**
+### Setup Requirements
 
-If it's obvious what your module touches, you can skip this section. For example, folks can probably figure out that your mysql_instance module affects their MySQL instances.
+#### Windows
 
-If there's more that they should know about, though, this is the place to mention:
+Assumes a functional Chocolatey environment and that the Sumo Logic Collector installer for Windows has been correctly imported into Chocolatey.
 
-* Files, packages, services, or operations that the module will alter, impact, or execute.
-* Dependencies that your module automatically installs.
-* Warnings or other important notices.
+#### Linux
 
-### Setup Requirements **OPTIONAL**
-
-If your module requires anything extra before setting up (pluginsync enabled, another module, etc.), mention it here.
-
-If your most recent release breaks compatibility or requires particular steps for upgrading, you might want to include an additional "Upgrading" section here.
+Download the Sumo Logic Collector package for your respective flavours and import into your YUM repos.
 
 ### Beginning with sumo
 
-The very basic steps needed for a user to get the module up and running. This can include setup steps, if necessary, or it can be an example of the most basic use of the module.
+Put the relevant configuration information into Hiera:
+
+```
+sumo::accessid: lkskj98983hjhj
+sumo::accesskey: jlkdlkaldkalkda984nb197jdnkjsomjsdkjiocjJAOSALDJWBDahsikldjkja78
+```
+
+Call in the `sumo` class in your required scope:
+
+```
+  class { 'sumo': }
+```
 
 ## Usage
 
-Include usage examples for common use cases in the **Usage** section. Show your users how to use your module to solve problems, and be sure to include code examples. Include three to five examples of the most important or common tasks a user can accomplish with your module. Show users how to accomplish more complex tasks that involve different types, classes, and functions working in tandem.
-
-## Reference
-
-This section is deprecated. Instead, add reference information to your code as Puppet Strings comments, and then use Strings to generate a REFERENCE.md in your module. For details on how to add code comments and generate documentation with Strings, see the Puppet Strings [documentation](https://puppet.com/docs/puppet/latest/puppet_strings.html) and [style guide](https://puppet.com/docs/puppet/latest/puppet_strings_style.html)
-
-If you aren't ready to use Strings yet, manually create a REFERENCE.md in the root of your module directory and list out each of your module's classes, defined types, facts, functions, Puppet tasks, task plans, and resource types and providers, along with the parameters for each.
-
-For each element (class, defined type, function, and so on), list:
-
-  * The data type, if applicable.
-  * A description of what the element does.
-  * Valid values, if the data type doesn't make it obvious.
-  * Default value, if any.
-
-For example:
+Expanding on the previous section, all the user properties can be specified in hiera.  Here are the defaults that can be overridden by site
+requirements:
 
 ```
-### `pet::cat`
-
-#### Parameters
-
-##### `meow`
-
-Enables vocalization in your cat. Valid options: 'string'.
-
-Default: 'medium-loud'.
+accessid                 : null
+accesskey                : null
+category                 : null
+clobber                  : 'true'
+collector_name           : "%{::hostname}"
+collector_secure_files   : null
+collector_url            : https://collectors.sumologic.com
+description              : "%{::hostname}"
+disable_action_source    : 'false'
+disable_script_source    : 'false'
+disable_upgrade          : 'true'
+ephemeral                : 'false'
+hostname                 : "%{::hostname}"
+local_config_mgmt        : null
+proxy_host               : null
+proxy_ntlmdomain         : null
+proxy_password           : null
+proxy_port               : null
+proxy_user               : null
+runas_username           : null
+skip_access_key_removal  : null
+skip_registration        : null
+sources_file_override    : null
+sync_sources_override    : null
+sources_path             : null
+sync_sources_path        : null
+target_cpu               : null
+time_zone                : null
+token                    : null
+win_run_as_password      : null
+sumo_user_properties_path: /opt/SumoCollector/config/user.properties
+sumo_package_name        : SumoCollector
+sumo_package_ver         : latest
+sumo_service_name        : collector
+sumo_service_state: 
+  running: true
+  enable : true
 ```
+
+Here are the Windows overrides:
+
+```
+sumo_service_name           : sumo-collector
+sumo_install_properties_path: 'C:\windows\temp\sumoVarFile.txt'
+sumo_user_properties_path   : 'C:\Program Files\Sumo Logic Collector\config\user.properties'
+```
+
+Please refer to Sumo documentation for an explanation of each setting: https://help.sumologic.com/03Send-Data/Installed-Collectors/05Reference-Information-for-Collector-Installation/06user.properties. (Bear in mind, some of the properties have been slightly modified, but it should be reasonably clear how they align).
 
 ## Limitations
 
-In the Limitations section, list any incompatibilities, known issues, or other warnings.
+* Nothing implemented for UNIX in this version.
+* Assumes chocolatey is the Windows package manager.
+* Debian/Ubuntu probably works, but is untested.
 
 ## Development
 
-In the Development section, tell other users the ground rules for contributing to your project and how they should submit their work.
+If you would like to contribute to this module, please submit a PR on github.  Thanks.
 
-## Release Notes/Contributors/Etc. **Optional**
 
-If you aren't using changelog, put your release notes here (though you should consider using changelog). You can also add any additional sections you feel are necessary or important to include here. Please use the `## ` header.
