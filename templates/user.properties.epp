@@ -6,11 +6,11 @@
 <% } -%>
 # https://help.sumologic.com/03Send-Data/Installed-Collectors/05Reference-Information-for-Collector-Installation/06user.properties
 <% if ($accessid and $accesskey) { -%>
-<% if $installer { %>sumo.<% } %>.accessid=<%= $accessid %>
-<% if $installer { %>sumo.<% } %>.accesskey=<%= $accesskey %>
+<%   if $installer { %>sumo.<% } %>.accessid=<%= $accessid %>
+<%   if $installer { %>sumo.<% } %>.accesskey=<%= $accesskey %>
 <% } -%>
 <% if $token { -%>
-<% if $installer { %>sumo.<% }>token_and_url=<%= $token %>
+<%   if $installer { %>sumo.<% } %>token_and_url=<%= $token %>
 <% } -%>
 <% if $category { -%>
 category=<%= $category %>
@@ -19,13 +19,13 @@ category=<%= $category %>
 clobber=<%= $clobber %>
 <% } -%>
 <% if $collector_name { -%>
-<% if $installer { %>collector.<% } %>name=<%= $collector_name %>
+<%   if $installer { %>collector.<% } %>name=<%= $collector_name %>
 <% } -%>
 <% if defined($collector_secure_files) { -%>
-<% if $installer { %>collector.<% } %>secureFiles=<%= $collector_secure_files %>
+<%   if $installer { %>collector.<% } %>secureFiles=<%= $collector_secure_files %>
 <% } -%>
 <% if $collector_url { -%>
-<% if $installer { %>collector.<% } %>url=<%= $collector_url %>
+<%   if $installer { %>collector.<% } %>url=<%= $collector_url %>
 <% } -%>
 <% if $description { -%>
 description=<%= $description %>
@@ -84,6 +84,6 @@ timeZone=<%= $time_zone %>
 <% if $win_run_as_password { -%>
 winRunAs.password=<%= $win_run_as_password %>
 <% } -%>
-<% if $wrapper_java_command and not $installer { -%>
+<% if $wrapper_java_command and ! $installer { -%>
 wrapper.java.command=<%= $wrapper_java_command %>
 <% } -%>
