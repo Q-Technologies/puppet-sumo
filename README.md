@@ -43,9 +43,15 @@ It takes the following platform approach:
 
 Assumes a functional Chocolatey environment and that the Sumo Logic Collector installer for Windows has been correctly imported into Chocolatey.
 
+Setup the Chocolatey package so that it installs the exe with the following command line options:
+
+```
+-console -q -varfile 'C:\windows\temp\sumoVarFile.txt'
+```
+
 #### Linux
 
-Download the Sumo Logic Collector package for your respective flavours and import into your YUM repos.
+Download the Sumo Logic Collector package for your respective flavours and import into your repos.
 
 ### Beginning with sumo
 
@@ -55,6 +61,7 @@ Put the relevant configuration information into Hiera:
 sumo::accessid: lkskj98983hjhj
 sumo::accesskey: jlkdlkaldkalkda984nb197jdnkjsomjsdkjiocjJAOSALDJWBDahsikldjkja78
 sumo::sumo_package_ver: 19.253-26
+sumo::sources_path: "/tmp/sumo-%{osfamily}.json"
 ```
 
 Call in the `sumo` class in your required scope:
@@ -69,54 +76,60 @@ Expanding on the previous section, all the user properties can be specified in h
 requirements:
 
 ```
-accessid                 : null
-accesskey                : null
-category                 : null
-clobber                  : 'true'
-collector_name           : "%{::hostname}"
-collector_secure_files   : null
-collector_url            : https://collectors.sumologic.com
-description              : "%{::hostname}"
-disable_action_source    : 'false'
-disable_script_source    : 'false'
-disable_upgrade          : 'true'
-ephemeral                : 'false'
-hostname                 : "%{::hostname}"
-local_config_mgmt        : null
-proxy_host               : null
-proxy_ntlmdomain         : null
-proxy_password           : null
-proxy_port               : null
-proxy_user               : null
-runas_username           : null
-skip_access_key_removal  : null
-skip_registration        : null
-sources_file_override    : null
-sync_sources_override    : null
-sources_path             : null
-sync_sources_path        : null
-target_cpu               : null
-time_zone                : null
-token                    : null
-win_run_as_password      : null
-sumo_user_properties_path: /opt/SumoCollector/config/user.properties
-sumo_package_name        : SumoCollector
-sumo_package_ver         : latest
-sumo_service_name        : collector
-sumo_service_state: 
+---
+sumo::accessid:                null
+sumo::accesskey:               null
+sumo::category:                null
+sumo::clobber:                 true
+sumo::collector_name:          "%{::hostname}"
+sumo::collector_secure_files:  true
+sumo::collector_url:           https://collectors.sumologic.com
+sumo::description:             null
+sumo::disable_action_source:   false
+sumo::disable_script_source:   false
+sumo::disable_upgrade:         true
+sumo::ephemeral:               false
+sumo::hostname:                "%{::hostname}"
+sumo::proxy_host:              null
+sumo::proxy_ntlmdomain:        null
+sumo::proxy_password:          null
+sumo::proxy_port:              null
+sumo::proxy_user:              null
+sumo::skip_access_key_removal: false
+sumo::skip_registration:       false
+sumo::local_config_mgmt:       false
+sumo::sources_path:            null
+sumo::sync_sources_path:       null
+sumo::target_cpu:              null
+sumo::time_zone:               null
+sumo::token:                   null
+sumo::runas_username:          null
+sumo::win_run_as_password:     null
+sumo::install_properties_path: null
+sumo::user_properties_path:    /opt/SumoCollector/config/user.properties
+sumo::package:
+  name:    SumoCollector
+  version: latest
+sumo::service:
+  name:    collector
   running: true
-  enable : true
+  enable:  true
 ```
 
 Here are the Windows overrides:
 
 ```
-sumo_service_name           : sumo-collector
-sumo_install_properties_path: 'C:\windows\temp\sumoVarFile.txt'
-sumo_user_properties_path   : 'C:\Program Files\Sumo Logic Collector\config\user.properties'
+sumo::service:
+  name: sumo-collector
+  running: true
+  enable:  true
+sumo::install_properties_path: 'C:\windows\temp\sumoVarFile.txt'
+sumo::user_properties_path:    'C:\Program Files\Sumo Logic Collector\config\user.properties'
 ```
 
 Please refer to Sumo documentation for an explanation of each setting: https://help.sumologic.com/03Send-Data/Installed-Collectors/05Reference-Information-for-Collector-Installation/06user.properties. (Bear in mind, some of the properties have been slightly modified, but it should be reasonably clear how they align).
+
+See the Reference.md file for more detailed information.
 
 ## Limitations
 
