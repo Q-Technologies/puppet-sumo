@@ -15,33 +15,21 @@
 <% if $category { -%>
 category=<%= $category %>
 <% } -%>
-<% if defined($clobber) { -%>
 clobber=<%= $clobber %>
-<% } -%>
 <% if $collector_name { -%>
 <%   if $installer { %>collector.<% } %>name=<%= $collector_name %>
 <% } -%>
-<% if defined($collector_secure_files) { -%>
-<%   if $installer { %>collector.<% } %>secureFiles=<%= $collector_secure_files %>
-<% } -%>
+<% if $installer { %>collector.<% } %>secureFiles=<%= $collector_secure_files %>
 <% if $collector_url { -%>
 <%   if $installer { %>collector.<% } %>url=<%= $collector_url %>
 <% } -%>
 <% if $description { -%>
 description=<%= $description %>
 <% } -%>
-<% if defined($disable_action_source) { -%>
 disableActionSource=<%= $disable_action_source %>
-<% } -%>
-<% if defined($disable_script_source) { -%>
 disableScriptSource=<%= $disable_script_source %>
-<% } -%>
-<% if defined($disable_upgrade) { -%>
 disableUpgrade=<%= $disable_upgrade %>
-<% } -%>
-<% if defined($ephemeral) { -%>
 ephemeral=<%= $ephemeral %>
-<% } -%>
 <% if $hostname { -%>
 hostName=<%= $hostname %>
 <% } -%>
@@ -63,12 +51,8 @@ proxy<% if $installer { %>.u<% } else { %>U<% } %>ser=<%= $proxy_user %>
 <% if $runas_username { -%>
 runAs.username=<%= $runas_username %>
 <% } -%>
-<% if defined($skip_access_key_removal) { -%>
 skipAccessKeyRemoval=<%= $skip_access_key_removal %>
-<% } -%>
-<% if defined($skip_registration) { -%>
 skipRegistration=<%= $skip_registration %>
-<% } -%>
 <% if ($sources_path and !$local_config_mgmt) { -%>
 sources=<%= $sources_path %>
 <% } -%>
