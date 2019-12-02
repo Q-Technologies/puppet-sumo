@@ -118,7 +118,7 @@ class sumo (
   String $user_properties_path,
   Optional[String] $install_properties_path,
   Struct[{name => String, version => String}] $package,
-  Struct[{name => String, running => Boolean, enable => Boolean}] $service,
+  Struct[{name => String, running => Boolean, enabled => Boolean}] $service,
 ){
   $template_data = {
     'accessid'                => $accessid,
@@ -188,7 +188,7 @@ class sumo (
   ########## start the service ############
   service { $service['name']:
     ensure => $service['running'],
-    enable => $service['enable'],
+    enable => $service['enabled'],
   }
 
 }
