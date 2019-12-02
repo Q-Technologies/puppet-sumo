@@ -6,8 +6,8 @@
 <% } -%>
 # https://help.sumologic.com/03Send-Data/Installed-Collectors/05Reference-Information-for-Collector-Installation/06user.properties
 <% if ($accessid and $accesskey) { -%>
-<%   if $installer { %>sumo.<% } %>.accessid=<%= $accessid %>
-<%   if $installer { %>sumo.<% } %>.accesskey=<%= $accesskey %>
+<%   if $installer { %>sumo.<% } %>accessid=<%= $accessid %>
+<%   if $installer { %>sumo.<% } %>accesskey=<%= $accesskey %>
 <% } -%>
 <% if $token { -%>
 <%   if $installer { %>sumo.<% } %>token_and_url=<%= $token %>
@@ -59,7 +59,7 @@ sources=<%= $sources_path %>
 <% if ($sync_sources_path and $local_config_mgmt){ -%>
 syncSources=<%= $sync_sources_path %>
 <% } -%>
-<% if defined($target_cpu) { -%>
+<% if $target_cpu { -%>
 targetCPU=<%= $target_cpu %>
 <% } -%>
 <% if $time_zone { -%>
