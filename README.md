@@ -85,8 +85,8 @@ sumo::collector_name:          "%{::hostname}"
 sumo::collector_secure_files:  true
 sumo::collector_url:           https://collectors.sumologic.com
 sumo::description:             null
-sumo::disable_action_source:   false
-sumo::disable_script_source:   false
+sumo::enable_action_source:    false
+sumo::enable_script_source:    false
 sumo::disable_upgrade:         true
 sumo::ephemeral:               false
 sumo::hostname:                "%{::hostname}"

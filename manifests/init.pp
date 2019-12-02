@@ -28,12 +28,10 @@
 #   Sets the URL used to register collector for data collection API. 
 # @param description
 #   Description for the collector to appear in Sumo Logic.
-# @param disable_action_source
-#   If your organization's internal policies restrict the use of Script Actions, you can disable them by setting this parameter to true.
-#   Specify as 'true' or 'false'.
-# @param disable_script_source
-#   If your organization's internal policies restrict the use of Script Sources, you can disable them by setting this parameter to true.
-#   Specify as 'true' or 'false'.
+# @param enable_action_source
+#   Script Action Sources are disabled by default. You can enable them by setting this parameter to true.
+# @param enable_script_source
+#   Script Sources are disabled by default. You can enable them by setting this parameter to true.
 # @param disable_upgrade
 #   If true, the collector rejects upgrade requests from Sumo.
 # @param ephemeral
@@ -97,8 +95,8 @@ class sumo (
   Boolean $collector_secure_files,
   String $collector_url,
   Optional[String] $description,
-  Boolean $disable_action_source,
-  Boolean $disable_script_source,
+  Boolean $enable_action_source,
+  Boolean $enable_script_source,
   Boolean $disable_upgrade,
   Boolean $ephemeral,
   String $hostname,
@@ -131,8 +129,8 @@ class sumo (
     'collector_secure_files'  => $collector_secure_files,
     'collector_url'           => $collector_url,
     'description'             => $description,
-    'disable_action_source'   => $disable_action_source,
-    'disable_script_source'   => $disable_script_source,
+    'enable_action_source'    => $enable_action_source,
+    'enable_script_source'    => $enable_script_source,
     'disable_upgrade'         => $disable_upgrade,
     'ephemeral'               => $ephemeral,
     'hostName'                => $hostname,

@@ -26,8 +26,8 @@ clobber=<%= $clobber %>
 <% if $description { -%>
 description=<%= $description %>
 <% } -%>
-disableActionSource=<%= $disable_action_source %>
-disableScriptSource=<%= $disable_script_source %>
+enableActionSource=<%= $enable_action_source %>
+enableScriptSource=<%= $enable_script_source %>
 disableUpgrade=<%= $disable_upgrade %>
 ephemeral=<%= $ephemeral %>
 <% if $hostname { -%>
