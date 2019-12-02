@@ -35,6 +35,13 @@ sumo::sources_path: "/tmp/sumo-%{osfamily}.json"
 
 The following parameters are available in the `sumo` class.
 
+##### `install`
+
+Data type: `Boolean`
+
+Whether to install and configure the Sumo Logic collector.  It defaults to true, but is implemented so that
+the collector can be configured globally, but not installed on nodes in certain Hiera scopes.
+
 ##### `accessid`
 
 Data type: `String`
@@ -84,19 +91,17 @@ Data type: `Optional[String]`
 
 Description for the collector to appear in Sumo Logic.
 
-##### `disable_action_source`
+##### `enable_action_source`
 
 Data type: `Boolean`
 
-If your organization's internal policies restrict the use of Script Actions, you can disable them by setting this parameter to true.
-Specify as 'true' or 'false'.
+Script Action Sources are disabled by default. You can enable them by setting this parameter to true.
 
-##### `disable_script_source`
+##### `enable_script_source`
 
 Data type: `Boolean`
 
-If your organization's internal policies restrict the use of Script Sources, you can disable them by setting this parameter to true.
-Specify as 'true' or 'false'.
+Script Sources are disabled by default. You can enable them by setting this parameter to true.
 
 ##### `disable_upgrade`
 
@@ -236,7 +241,7 @@ Set the name and version of the package to install
 
 ##### `service`
 
-Data type: `Struct[{name => String, running => Boolean, enable => Boolean}]`
+Data type: `Struct[{name => String, running => Boolean, enabled => Boolean}]`
 
 Set the name and state of the collector service
 

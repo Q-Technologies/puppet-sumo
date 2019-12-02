@@ -113,7 +113,7 @@ sumo::package:
 sumo::service:
   name:    collector
   running: true
-  enable:  true
+  enabled: true
 ```
 
 Here are the Windows overrides:
@@ -121,10 +121,15 @@ Here are the Windows overrides:
 ```
 sumo::service:
   name: sumo-collector
-  running: true
-  enable:  true
 sumo::install_properties_path: 'C:\windows\temp\sumoVarFile.txt'
 sumo::user_properties_path:    'C:\Program Files\Sumo Logic Collector\config\user.properties'
+```
+
+If you want to install globally except a few test systems, then you can specify the following Hiera in the scope of the test systems
+so that it will not be installed or configured on them:
+
+```
+sumo::install: false
 ```
 
 Please refer to Sumo documentation for an explanation of each setting: https://help.sumologic.com/03Send-Data/Installed-Collectors/05Reference-Information-for-Collector-Installation/06user.properties. (Bear in mind, some of the properties have been slightly modified, but it should be reasonably clear how they align).

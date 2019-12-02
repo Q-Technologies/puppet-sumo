@@ -11,6 +11,9 @@
 #   sumo::sources_path: "/tmp/sumo-%{osfamily}.json"
 #    
 #
+# @param install
+#   Whether to install and configure the Sumo Logic collector.  It defaults to true, but is implemented so that
+#   the collector can be configured globally, but not installed on nodes in certain Hiera scopes.
 # @param accessid
 #   The Sumo Logic collector access ID
 # @param accesskey
@@ -87,6 +90,7 @@
 # @param service
 #   Set the name and state of the collector service
 class sumo (
+  Boolean $install,
   String $accessid,
   String $accesskey,
   Optional[String] $category,
@@ -150,45 +154,48 @@ class sumo (
     'token'                   => $token,
     'win_run_as_password'     => $win_run_as_password
   }
-  ########## Write the config file ############
-  File {
-    mode    => '0644',
-    ensure  => 'file',
-  }
-  if $::osfamily == 'windows' {
-    File {
-      group => 'Administrators',
-    }
-    Package {
-      provider => 'chocolatey'
-    }
-    file { $install_properties_path:
-      content => epp('sumo/user.properties.epp', $template_data + { installer => true } ),
-      before  => Package[$package['name']],
-    }
-  } else {
-    File {
-      owner => 'root',
-      group => 'root',
-    }
-  }
-  file { $user_properties_path:
-    ensure  => 'file',
-    mode    => '0644',
-    content => epp('sumo/user.properties.epp', $template_data),
-    require => Package[$package['name']],
-    notify  => Service[$service['name']];
-  }
 
-  ########## Install Package ############
-  package { $package['name']:
-    ensure => $package['version'],
-  }
+  if $install {
+    ########## Write the config file ############
+    File {
+      mode    => '0644',
+      ensure  => 'file',
+    }
+    if $::osfamily == 'windows' {
+      File {
+        group => 'Administrators',
+      }
+      Package {
+        provider => 'chocolatey'
+      }
+      file { $install_properties_path:
+        content => epp('sumo/user.properties.epp', $template_data + { installer => true } ),
+        before  => Package[$package['name']],
+      }
+    } else {
+      File {
+        owner => 'root',
+        group => 'root',
+      }
+    }
+    file { $user_properties_path:
+      ensure  => 'file',
+      mode    => '0644',
+      content => epp('sumo/user.properties.epp', $template_data),
+      require => Package[$package['name']],
+      notify  => Service[$service['name']];
+    }
 
-  ########## start the service ############
-  service { $service['name']:
-    ensure => $service['running'],
-    enable => $service['enabled'],
+    ########## Install Package ############
+    package { $package['name']:
+      ensure => $package['version'],
+    }
+
+    ########## start the service ############
+    service { $service['name']:
+      ensure => $service['running'],
+      enable => $service['enabled'],
+    }
   }
 
 }
