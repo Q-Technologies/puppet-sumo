@@ -196,6 +196,17 @@ class sumo (
       ensure => $service['running'],
       enable => $service['enabled'],
     }
+  } else {
+    if $::osfamily == 'windows' {
+      file { $install_properties_path:
+        ensure => absent,
+      }
+    }
+    file { $user_properties_path:
+      ensure => absent,
+    }
+    package { $package['name']:
+      ensure => absent,
+    }
   }
-
 }
