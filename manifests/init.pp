@@ -193,8 +193,8 @@ class sumo (
 
     ########## start the service ############
     service { $service['name']:
-      ensure => $service['running'],
-      enable => $service['enabled'],
+      ensure  => $service['running'],
+      enable  => $service['enabled'],
       require => Package[$package['name']],
     }
   } else {
