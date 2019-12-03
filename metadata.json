@@ -1,6 +1,6 @@
 {
   "name": "qtechnologies-sumo",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "author": "qtechnologies",
   "summary": "Install and configure the Sumo Logic collector on Linux and Windows using local software distribution. Providing more control over lifecycle.",
   "license": "Apache-2.0",
