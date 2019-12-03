@@ -1,8 +1,8 @@
 {
   "name": "qtechnologies-sumo",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "qtechnologies",
-  "summary": "Install and configure the Sumo Logic collector install using local software distribution. Providing more control over lifecycle.",
+  "summary": "Install and configure the Sumo Logic collector on Linux and Windows using local software distribution. Providing more control over lifecycle.",
   "license": "Apache-2.0",
   "source": "https://github.com/Q-Technologies/puppet-sumo",
   "project_page": "https://github.com/Q-Technologies/puppet-sumo",

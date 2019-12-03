@@ -1,6 +1,6 @@
 # sumo
 
-Install and configure the Sumo Logic collector install using local software distribution. Providing more control over lifecycle.
+Install and configure the Sumo Logic collector on Linux and Windows using local software distribution. Providing more control over lifecycle.
 
 #### Table of Contents
 
@@ -125,7 +125,7 @@ sumo::install_properties_path: 'C:\windows\temp\sumoVarFile.txt'
 sumo::user_properties_path:    'C:\Program Files\Sumo Logic Collector\config\user.properties'
 ```
 
-If you want to install globally except a few test systems, then you can specify the following Hiera in the scope of the test systems
+If you want to install globally except on a few test systems, then you can specify the following Hiera in the scope of the test systems
 so that it will not be installed or configured on them:
 
 ```

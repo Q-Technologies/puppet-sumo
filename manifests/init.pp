@@ -1,4 +1,4 @@
-# @summary Configures the Sumo Collector
+# @summary Configures the Sumo Collector on Windows and Linux
 #
 # @example Basic usage
 #   class { 'sumo': }

@@ -5,13 +5,13 @@
 
 **Classes**
 
-* [`sumo`](#sumo): Configures the Sumo Collector
+* [`sumo`](#sumo): Configures the Sumo Collector on Windows and Linux
 
 ## Classes
 
 ### sumo
 
-Configures the Sumo Collector
+Configures the Sumo Collector on Windows and Linux
 
 #### Examples
 
