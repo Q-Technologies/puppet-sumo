@@ -158,7 +158,7 @@ class sumo (
   if $install {
     ########## Write the config file ############
     File {
-      mode    => '0644',
+      mode    => '0664',
       ensure  => 'file',
     }
     if $::osfamily == 'windows' {
