@@ -32,8 +32,6 @@ It takes the following platform approach:
 
 * Windows - install pkg via chocolatey with the site customisation being driven during pkg install. Upgradeable via Chocolatey.
 * Linux - install RPM, configure, then start sumo.  Upgradeable via RPM.
-<!--* UNIX (TODO) - install from tar, configure, then start sumo.  Not readily upgradeable.-->
-
 
 ## Setup
 
