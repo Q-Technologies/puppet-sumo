@@ -195,6 +195,7 @@ class sumo (
     service { $service['name']:
       ensure => $service['running'],
       enable => $service['enabled'],
+      require => Package[$package['name']],
     }
   } else {
     if $::osfamily == 'windows' {
@@ -204,6 +205,11 @@ class sumo (
     }
     file { $user_properties_path:
       ensure => absent,
+    }
+    service { $service['name']:
+      ensure => false,
+      enable => false,
+      before => Package[$package['name']],
     }
     package { $package['name']:
       ensure => absent,
