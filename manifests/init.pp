@@ -157,13 +157,11 @@ class sumo (
 
   if $install {
     ########## Write the config file ############
-    File {
-      mode    => '0664',
-      ensure  => 'file',
-    }
     if $::osfamily == 'windows' {
       File {
+        ensure  => 'file',
         group => 'Administrators',
+        mode    => '0664',
       }
       Package {
         provider => 'chocolatey'
@@ -174,13 +172,13 @@ class sumo (
       }
     } else {
       File {
+        ensure  => 'file',
         owner => 'root',
         group => 'root',
+        mode    => '0644',
       }
     }
     file { $user_properties_path:
-      ensure  => 'file',
-      mode    => '0644',
       content => epp('sumo/user.properties.epp', $template_data),
       require => Package[$package['name']],
       notify  => Service[$service['name']];
